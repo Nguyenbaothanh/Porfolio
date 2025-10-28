@@ -13,10 +13,12 @@ const AdminPanel: React.FC = () => {
 
   const handleInputChange = (section: keyof PortfolioContent, field: string, value: string, index?: number) => {
     setEditableContent(prev => {
-      const newContent = { ...prev };
+      const newContent = JSON.parse(JSON.stringify(prev));
       if (index !== undefined && Array.isArray(newContent[section])) {
-        const arraySection = newContent[section] as any[];
-        arraySection[index] = { ...arraySection[index], [field]: value };
+        const item = (newContent[section] as any[])[index];
+        if(item) {
+            item[field] = value;
+        }
       } else if (typeof newContent[section] === 'object' && newContent[section] !== null) {
         (newContent[section] as any)[field] = value;
       }
@@ -27,9 +29,11 @@ const AdminPanel: React.FC = () => {
   // Project handlers
   const handleProjectTagsChange = (index: number, value: string) => {
      setEditableContent(prev => {
-        const newProjects = [...prev.projects];
-        newProjects[index] = {...newProjects[index], tags: value.split(',').map(tag => tag.trim())};
-        return {...prev, projects: newProjects};
+        const newContent = JSON.parse(JSON.stringify(prev));
+        if (newContent.projects[index]) {
+            newContent.projects[index].tags = value.split(',').map(tag => tag.trim());
+        }
+        return newContent;
     });
   }
   
@@ -41,66 +45,80 @@ const AdminPanel: React.FC = () => {
           tags: ['new', 'tag'],
           repoUrl: ''
       };
-      setEditableContent(prev => ({...prev, projects: [...prev.projects, newProject]}));
+      setEditableContent(prev => {
+        const newContent = JSON.parse(JSON.stringify(prev));
+        newContent.projects.push(newProject);
+        return newContent;
+      });
   }
 
   const handleRemoveProject = (index: number) => {
-      setEditableContent(prev => ({...prev, projects: prev.projects.filter((_, i) => i !== index)}));
+      setEditableContent(prev => {
+        const newContent = JSON.parse(JSON.stringify(prev));
+        newContent.projects.splice(index, 1);
+        return newContent;
+      });
   }
 
   // Skill Handlers
   const handleCategoryTitleChange = (catIndex: number, value: string) => {
     setEditableContent(prev => {
-      const newSkills = prev.skills.map((cat, i) => i === catIndex ? { ...cat, title: value } : cat);
-      return { ...prev, skills: newSkills };
+        const newContent = JSON.parse(JSON.stringify(prev));
+        if(newContent.skills[catIndex]) {
+            newContent.skills[catIndex].title = value;
+        }
+        return newContent;
     });
   };
 
   const handleAddCategory = () => {
     const newCategory: SkillCategory = { title: "New Category", skills: [] };
-    setEditableContent(prev => ({ ...prev, skills: [...prev.skills, newCategory] }));
+    setEditableContent(prev => {
+        const newContent = JSON.parse(JSON.stringify(prev));
+        newContent.skills.push(newCategory);
+        return newContent;
+    });
   };
 
   const handleRemoveCategory = (catIndex: number) => {
-    setEditableContent(prev => ({ ...prev, skills: prev.skills.filter((_, i) => i !== catIndex) }));
+    setEditableContent(prev => {
+        const newContent = JSON.parse(JSON.stringify(prev));
+        newContent.skills.splice(catIndex, 1);
+        return newContent;
+    });
   };
 
   const handleSkillChange = (catIndex: number, skillIndex: number, field: keyof Skill, value: string) => {
     setEditableContent(prev => {
-      const newSkills = prev.skills.map((cat, i) => {
-        if (i === catIndex) {
-          const updatedSkills = cat.skills.map((skill, j) => j === skillIndex ? { ...skill, [field]: value } : skill);
-          return { ...cat, skills: updatedSkills };
+        const newContent = JSON.parse(JSON.stringify(prev));
+        const category = newContent.skills[catIndex];
+        if (category && category.skills[skillIndex]) {
+            (category.skills[skillIndex] as any)[field] = value;
         }
-        return cat;
-      });
-      return { ...prev, skills: newSkills };
+        return newContent;
     });
   };
 
   const handleAddSkill = (catIndex: number) => {
     const newSkill: Skill = { name: "New Skill", icon: '<svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12 6a.96.96 0 00-.96.96v4.08H6.96a.96.96 0 100 1.92h4.08v4.08a.96.96 0 101.92 0v-4.08h4.08a.96.96 0 100-1.92h-4.08V6.96A.96.96 0 0012 6z"/></svg>' };
     setEditableContent(prev => {
-      const newSkills = prev.skills.map((cat, i) => {
-        if (i === catIndex) {
-          return { ...cat, skills: [...cat.skills, newSkill] };
+        const newContent = JSON.parse(JSON.stringify(prev));
+        const category = newContent.skills[catIndex];
+        if (category) {
+            category.skills.push(newSkill);
         }
-        return cat;
-      });
-      return { ...prev, skills: newSkills };
+        return newContent;
     });
   };
 
   const handleRemoveSkill = (catIndex: number, skillIndex: number) => {
     setEditableContent(prev => {
-      const newSkills = prev.skills.map((cat, i) => {
-        if (i === catIndex) {
-          const updatedSkills = cat.skills.filter((_, j) => j !== skillIndex);
-          return { ...cat, skills: updatedSkills };
+        const newContent = JSON.parse(JSON.stringify(prev));
+        const category = newContent.skills[catIndex];
+        if (category) {
+            category.skills.splice(skillIndex, 1);
         }
-        return cat;
-      });
-      return { ...prev, skills: newSkills };
+        return newContent;
     });
   };
 

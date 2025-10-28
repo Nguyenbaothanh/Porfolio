@@ -20,8 +20,8 @@ export const INITIAL_CONTENT: PortfolioContent = {
     {
       title: 'Languages & Databases',
       skills: [
-        { name: 'Python', icon: '<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><title>Python</title><path d="M11.964 16.336c-3.21.024-5.23-1.64-5.23-3.72h2.448c0 .94.624 1.452 1.452 1.452.804 0 1.356-.384 1.356-1.056 0-.672-.552-1.008-1.356-1.38-1.032-.48-2.232-.936-2.232-2.688 0-1.56.984-2.616 2.688-2.616 1.476 0 2.448.804 2.448 1.824h-2.352c0-.408-.312-.624-.72-.624-.456 0-.744.264-.744.624 0 .408.288.648.96.96.936.432 2.4.96 2.4 2.832 0 1.776-1.152 2.976-3.144 2.976zm-.024-12.736c-3.21 0-5.23 1.64-5.23 3.72h2.448c0-.94.624-1.452 1.452-1.452.804 0 1.356.384 1.356 1.056 0 .672-.552-1.008-1.356 1.38-1.032.48-2.232.936-2.232 2.688 0 1.56.984 2.616 2.688 2.616 1.476 0 2.448.804 2.448 1.824h-2.352c0-.408-.312-.624-.72-.624-.456 0-.744.264-.744.624 0 .408.288.648.96.96.936.432 2.4.96 2.4 2.832 0 1.776-1.152 2.976-3.144 2.976v.024H12c6.627 0 12-5.373 12-12S18.627 0 12 0H0v12h11.94v-8.4z"/></svg>' },
-        { name: 'SQL', icon: '<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><title>SQL</title><path d="M4.68 15.544h2.952v-2.88H4.68v2.88zm3.936 0h2.952v-2.88H8.616v2.88zm3.936 0h2.952v-2.88h-2.952v2.88zM4.68 19.344h2.952v-2.88H4.68v2.88zm3.936 0h2.952v-2.88H8.616v2.88zm3.936 0h2.952v-2.88h-2.952v2.88zM24 12v1.92h-4.08V12H24zm-5.064 0v1.92h-4.08V12h4.08zM12 4.656h-2.904a2.92 2.92 0 00-2.904 2.904v9.888a.913.913 0 00.912.912H12a2.89 2.89 0 002.88-2.88V7.56A2.92 2.92 0 0012 4.656zm-1.008 1.896a.9.9 0 110 1.8.9.9 0 010-1.8zM12 0h-2.88a2.89 2.89 0 00-2.88 2.88v.864h2.88a2.89 2.89 0 012.88 2.88v10.368a.913.913 0 00.912.912H12a2.89 2.89 0 002.88-2.88V2.88A2.89 2.89 0 0012 0zm-1.008 2.88a.9.9 0 110 1.8.9.9 0 010-1.8zM4.08 12v1.92H0V12h4.08z"/></svg>' },
+        { name: 'Python', icon: '<img src="https://cdn.iconscout.com/icon/free/png-256/free-postgresql-icon-svg-download-png-1175119.png" alt="Python Logo" width="100" height="100" />' },
+        { name: 'SQL', icon: '<img src="https://cdn.iconscout.com/icon/free/png-256/free-postgresql-icon-svg-download-png-1175119.png" alt="Python Logo" width="100" height="100" />' },
         { name: 'PostgreSQL', icon: '<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#4169E1"><title>PostgreSQL</title><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1.12 15.6H8.4V8.4h2.48c2.6 0 4.2 1.28 4.2 3.6 0 1.44-.8 2.56-2.04 3.12 1.44.52 2.44 1.72 2.44 3.48 0 2.68-1.8 4-4.56 4zm0-6.2c1.4 0 2.2-.76 2.2-2s-.8-2-2.2-2H9.6v4h1.28zm.08 4.8c1.64 0 2.6-.84 2.6-2.24s-.96-2.24-2.6-2.24H9.6v4.48h1.6z"/></svg>' },
         { name: 'MySQL', icon: '<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#4479A1"><title>MySQL</title><path d="M12.001 2.213C6.586 2.213 2.214 6.586 2.214 12c0 5.414 4.372 9.787 9.787 9.787 5.414 0 9.787-4.373 9.787-9.787C21.787 6.585 17.414 2.213 12.001 2.213zm4.502 14.076c-.198.663-1.229.838-1.57.886l-2.06-2.583v2.333c0 .247-.197.444-.444.444h-1.06c-.247 0-.444-.197-.444-.444v-2.33l-2.085 2.58c-.34.05-.1.888-1.57.888s-1.374-.225-1.57-.888l3.14-3.816-3.14-3.816c.198-.663 1.229-.838 1.57-.886l2.086 2.58V5.008c0-.247.197-.444.444-.444h1.06c.247 0 .444.197.444.444v5.333l2.06-2.58c.34-.05 1.374-.225 1.57-.886l-3.14 3.816 3.14 3.815z"/></svg>' },
         { name: 'SQL Server', icon: '<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#CC2927"><title>Microsoft SQL Server</title><path d="M4 4h12v2H4zm0 4h12v2H4zm0 4h12v2H4zm13 2l4 4-4 4v-3H9v-2h8z"/></svg>' },
@@ -61,28 +61,28 @@ export const INITIAL_CONTENT: PortfolioContent = {
     {
       title: 'Visualize Dashboard',
       description: 'Developed a data visualization dashboard using Power BI, facilitating efficient data analysis and presentation.',
-      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=600&h=400&fit=crop',
+      image: 'https://assets.justinmind.com/wp-content/uploads/2018/12/6-best-practices-for-Dashboard-Design-Justinmind-header-768x492.png',
       tags: ['Power BI', 'Data Visualization', 'Data Analysis'],
       repoUrl: 'https://github.com/Nguyenbaothanh/Dashboard',
     },
     {
       title: 'Automation Workflow',
       description: 'Utilized n8n to automate tasks (ETL, AI, Read Insight Data), optimizing workflows and enhancing data processing efficiency.',
-      image: 'https://images.unsplash.com/photo-1504639725590-7ea024b3b198?q=80&w=600&h=400&fit=crop',
+      image: 'https://cdn.prod.website-files.com/64be86eaa29fa71f24b00685/6566021e312a8bb43bae53a5_How%20Workflow%20Automation%20Transforms%20Modern%20Business_%20(1).jpg',
       tags: ['N8N', 'ETL', 'Automation', 'AI'],
       repoUrl: 'https://github.com/Nguyenbaothanh/Automation-Workflow',
     },
     {
       title: 'CI/CD Pipeline',
       description: 'CI/CD pipeline using GitHub for code management, Docker for containerization, Jenkins for CI/CD, and Netlify for fast web deployment.',
-      image: 'https://images.unsplash.com/photo-1633356122102-3fe601e05bd2?q=80&w=600&h=400&fit=crop',
+      image: 'https://static.tildacdn.com/tild3034-3239-4861-b436-643837646234/Standard-DevOps-CICD.png',
       tags: ['CI/CD', 'Jenkins', 'Docker', 'GitHub', 'Netlify'],
       repoUrl: 'https://github.com/Nguyenbaothanh/learn-jenkins-app',
     },
     {
       title: 'AI Knowledge Base Preparation',
       description: 'Engineered a system to construct a knowledge base for AI applications by generating embeddings for both images and text, enabling advanced semantic search and retrieval.',
-      image: 'https://images.unsplash.com/photo-1620712943543-263632591656?q=80&w=600&h=400&fit=crop',
+      image: 'https://cdn.vectorstock.com/i/500p/67/72/knowledge-base-icon-set-education-vector-55136772.jpg',
       tags: ['AI', 'Data Engineering', 'Embeddings', 'Knowledge Base', 'Python'],
       repoUrl: 'https://github.com/Nguyenbaothanh/embedding-images.git',
     },
