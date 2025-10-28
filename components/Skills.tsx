@@ -4,7 +4,7 @@ import type { Skill } from '../types';
 
 const SkillCard: React.FC<Skill> = ({ name, icon }) => (
   <div className="bg-secondary p-4 rounded-lg flex items-center space-x-4 transform hover:scale-110 hover:bg-accent transition-all duration-300 shadow-lg">
-    <div dangerouslySetInnerHTML={{ __html: icon }} />
+    <div className="w-8 h-8" dangerouslySetInnerHTML={{ __html: icon }} />
     <span className="font-semibold text-lg">{name}</span>
   </div>
 );
