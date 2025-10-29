@@ -2,10 +2,9 @@ import React from 'react';
 import { useContent } from '../contexts/ContentContext';
 import type { Skill } from '../types';
 
-const SkillCard: React.FC<Skill> = ({ name, icon }) => (
-  <div className="bg-secondary p-4 rounded-lg flex items-center space-x-4 transform hover:scale-110 hover:bg-accent transition-all duration-300 shadow-lg">
-    <div className="w-8 h-8" dangerouslySetInnerHTML={{ __html: icon }} />
-    <span className="font-semibold text-lg">{name}</span>
+const SkillChip: React.FC<{ name: string }> = ({ name }) => (
+  <div className="bg-secondary px-4 py-2 rounded-full text-text-secondary font-medium transform hover:scale-110 hover:bg-accent hover:text-white transition-all duration-300 shadow-md cursor-default">
+    {name}
   </div>
 );
 
@@ -19,13 +18,13 @@ const Skills: React.FC = () => {
         <div className="w-24 h-1 bg-accent mx-auto mt-2"></div>
         <p className="text-text-secondary mt-4 max-w-2xl mx-auto">The technologies I use to turn ideas into reality.</p>
       </div>
-      <div className="max-w-5xl mx-auto space-y-12">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {content.skills.map((category) => (
-          <div key={category.title}>
-            <h3 className="text-2xl font-bold text-center mb-8 text-highlight">{category.title}</h3>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+          <div key={category.title} className="bg-secondary/50 p-6 rounded-lg">
+            <h3 className="text-xl font-bold text-center mb-6 text-highlight">{category.title}</h3>
+            <div className="flex flex-wrap justify-center gap-3">
               {category.skills.map((skill) => (
-                <SkillCard key={skill.name} name={skill.name} icon={skill.icon} />
+                <SkillChip key={skill.name} name={skill.name} />
               ))}
             </div>
           </div>

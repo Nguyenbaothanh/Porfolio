@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useContent } from '../contexts/ContentContext';
-import type { PortfolioContent, Project, SkillCategory, Skill } from '../types';
+import type { PortfolioContent, Project, SkillCategory, Skill, Experience } from '../types';
 
 const AdminPanel: React.FC = () => {
   const { content, setContent, resetContent } = useContent();
@@ -88,19 +88,19 @@ const AdminPanel: React.FC = () => {
     });
   };
 
-  const handleSkillChange = (catIndex: number, skillIndex: number, field: keyof Skill, value: string) => {
+  const handleSkillChange = (catIndex: number, skillIndex: number, value: string) => {
     setEditableContent(prev => {
         const newContent = JSON.parse(JSON.stringify(prev));
         const category = newContent.skills[catIndex];
         if (category && category.skills[skillIndex]) {
-            (category.skills[skillIndex] as any)[field] = value;
+            category.skills[skillIndex].name = value;
         }
         return newContent;
     });
   };
 
   const handleAddSkill = (catIndex: number) => {
-    const newSkill: Skill = { name: "New Skill", icon: '<svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12 6a.96.96 0 00-.96.96v4.08H6.96a.96.96 0 100 1.92h4.08v4.08a.96.96 0 101.92 0v-4.08h4.08a.96.96 0 100-1.92h-4.08V6.96A.96.96 0 0012 6z"/></svg>' };
+    const newSkill: Skill = { name: "New Skill" };
     setEditableContent(prev => {
         const newContent = JSON.parse(JSON.stringify(prev));
         const category = newContent.skills[catIndex];
@@ -119,6 +119,49 @@ const AdminPanel: React.FC = () => {
             category.skills.splice(skillIndex, 1);
         }
         return newContent;
+    });
+  };
+  
+  // Experience Handlers
+  const handleExperienceChange = (index: number, field: keyof Experience, value: string) => {
+    setEditableContent(prev => {
+      const newContent = JSON.parse(JSON.stringify(prev));
+      const exp = newContent.experience[index];
+      if (exp) {
+        if (field === 'description') {
+          exp.description = value.split('\n');
+        } else if (field === 'tags') {
+          exp.tags = value.split(',').map(tag => tag.trim());
+        }
+        else {
+          (exp as any)[field] = value;
+        }
+      }
+      return newContent;
+    });
+  };
+  
+  const handleAddExperience = () => {
+    const newExperience: Experience = {
+      role: 'New Role',
+      company: 'New Company',
+      companyDescription: 'Job Type',
+      period: 'Year - Year',
+      description: ['Responsibility 1', 'Responsibility 2'],
+      tags: ['tag 1', 'tag 2'],
+    };
+    setEditableContent(prev => {
+      const newContent = JSON.parse(JSON.stringify(prev));
+      newContent.experience.push(newExperience);
+      return newContent;
+    });
+  };
+  
+  const handleRemoveExperience = (index: number) => {
+    setEditableContent(prev => {
+      const newContent = JSON.parse(JSON.stringify(prev));
+      newContent.experience.splice(index, 1);
+      return newContent;
     });
   };
 
@@ -199,14 +242,8 @@ const AdminPanel: React.FC = () => {
                       type="text" 
                       placeholder="Skill Name"
                       value={skill.name} 
-                      onChange={(e) => handleSkillChange(catIndex, skillIndex, 'name', e.target.value)}
+                      onChange={(e) => handleSkillChange(catIndex, skillIndex, e.target.value)}
                       className="w-full bg-gray-700 p-2 rounded mt-1"
-                    />
-                    <textarea 
-                      placeholder="SVG Icon Markup"
-                      value={skill.icon} 
-                      onChange={(e) => handleSkillChange(catIndex, skillIndex, 'icon', e.target.value)}
-                      className="w-full bg-gray-700 p-2 rounded mt-2 h-24 font-mono text-xs"
                     />
                   </div>
                 ))}
@@ -214,6 +251,32 @@ const AdminPanel: React.FC = () => {
               </div>
             ))}
             <button onClick={handleAddCategory} className="w-full mt-4 bg-green-600 hover:bg-green-500 p-2 rounded">Add New Category</button>
+          </div>
+          
+          {/* Experience Section */}
+          <div className="bg-primary p-4 rounded-lg">
+            <h3 className="font-bold mb-2 text-lg">Experience Section</h3>
+            {editableContent.experience.map((exp, index) => (
+              <div key={index} className="bg-secondary p-3 my-2 rounded-md">
+                <div className="flex justify-between items-center mb-2">
+                  <h4 className="font-semibold">Experience #{index + 1}</h4>
+                  <button onClick={() => handleRemoveExperience(index)} className="text-red-500 hover:text-red-400 text-xs">Remove</button>
+                </div>
+                <label className="block text-sm mt-2">Role:</label>
+                <input type="text" value={exp.role} onChange={(e) => handleExperienceChange(index, 'role', e.target.value)} className="w-full bg-gray-700 p-2 rounded mt-1"/>
+                <label className="block text-sm mt-2">Company:</label>
+                <input type="text" value={exp.company} onChange={(e) => handleExperienceChange(index, 'company', e.target.value)} className="w-full bg-gray-700 p-2 rounded mt-1"/>
+                <label className="block text-sm mt-2">Company Description (e.g. Full-time):</label>
+                <input type="text" value={exp.companyDescription} onChange={(e) => handleExperienceChange(index, 'companyDescription', e.target.value)} className="w-full bg-gray-700 p-2 rounded mt-1"/>
+                <label className="block text-sm mt-2">Period:</label>
+                <input type="text" value={exp.period} onChange={(e) => handleExperienceChange(index, 'period', e.target.value)} className="w-full bg-gray-700 p-2 rounded mt-1"/>
+                <label className="block text-sm mt-2">Description (one point per line):</label>
+                <textarea value={exp.description.join('\n')} onChange={(e) => handleExperienceChange(index, 'description', e.target.value)} className="w-full bg-gray-700 p-2 rounded mt-1 h-24"/>
+                <label className="block text-sm mt-2">Tags (comma separated):</label>
+                <input type="text" value={exp.tags.join(', ')} onChange={(e) => handleExperienceChange(index, 'tags', e.target.value)} className="w-full bg-gray-700 p-2 rounded mt-1"/>
+              </div>
+            ))}
+            <button onClick={handleAddExperience} className="w-full mt-4 bg-blue-600 hover:bg-blue-500 p-2 rounded">Add Experience</button>
           </div>
 
           {/* Projects Section */}

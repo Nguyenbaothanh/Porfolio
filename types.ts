@@ -2,7 +2,6 @@ import type React from 'react';
 
 export interface Skill {
   name: string;
-  icon: string; // Changed from React.ReactNode to string to hold SVG markup
 }
 
 export interface Project {
@@ -17,6 +16,15 @@ export interface Project {
 export interface SkillCategory {
     title: string;
     skills: Skill[];
+}
+
+export interface Experience {
+  role: string;
+  company: string;
+  companyDescription: string;
+  period: string;
+  description: string[];
+  tags: string[];
 }
 
 export interface PortfolioContent {
@@ -36,6 +44,7 @@ export interface PortfolioContent {
     p3: string;
   };
   skills: SkillCategory[];
+  experience: Experience[];
   projects: Project[];
   contact: {
     email: string;
